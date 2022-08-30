@@ -1,0 +1,26 @@
+import csv
+data1 = []
+data2 = []
+with open('final.csv')as f:
+    csv_reader = csv.reader(f)
+    for row in csv_reader:
+        data1.append(row)
+with open('archive_dataset_sorted.csv')as f:
+    csv_reader = csv.reader(f)
+    for row in csv_reader:
+        data2.append(row)
+headers1 = data1[0]
+headers2 = data2[0]
+planet_data_1 = data1[1:]
+planet_data_2 = data2[1:]
+headers = headers1+headers2
+planet_data = []
+for index,data in enumerate(planet_data_1):
+    planet_data.append(data+planet_data_2[index])
+
+with open('merged.csv','w',newline = '')as f:
+    csv_writer = csv.writer(f)
+    csv_writer.writerow(headers)
+    csv_writer.writerows(planet_data)    
+
+
